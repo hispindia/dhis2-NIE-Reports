@@ -1,0 +1,914 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+    <title>Title</title>
+<link rel="stylesheet" href="http://dhis2-cdn.org/v221/ext/resources/css/ext-plugin-gray.css" />
+
+    <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+  
+<script src="https://dhis2-cdn.org/v225-1/plugin/jquery-2.2.4.min.js"></script>
+  <script src="https://dhis2-cdn.org/v225-1/plugin/chart.js"></script>
+  
+  <script src="http://dhis2-cdn.org/v221/openlayers/OpenLayers.js"></script>
+<script src="http://dhis2-cdn.org/v221/ext/ext-all.js"></script>
+<script src="http://dhis2-cdn.org/v221/plugin/map.js"></script>
+ <script SRC="../api/documents/llj6DfnRKhA/data"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+	
+	<!--<link rel="stylesheet" src="../api/documents/WPkXK7AilB5/data" >-->
+	
+   <!--<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />-->
+   <link rel="stylesheet" href="../api/documents/WPkXK7AilB5/data" />
+   <!--<script type="text/css" src="../api/documents/WPkXK7AilB5/data"> </script>-->
+   <script src="../api/documents/icyWoug6UaZ/data"></script>
+   <!-- <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>-->
+    
+ <!-- <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">-->
+<script type="text/css" src="../api/documents/NX6rSSSY5Mj/data"> </script>
+<!--<link rel="stylesheet" SRC="../api/documents/NX6rSSSY5Mj/data">-->
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-alpha2/html2canvas.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-alpha2/html2canvas.svg.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+	<script src="https://html2canvas.hertzen.com/build/html2canvas.js"></script>
+
+
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+ #map1  {
+
+        margin-left:10%;
+        margin-right:10%;
+        position: relative;
+        width: 400px;
+        height:450px;
+
+
+    }
+	.leaflet-bar a:first-child{
+		display:none;
+		}
+		.leaflet-bar a:last-child{
+		display:none;
+		}
+</style>
+    <script type="text/javascript">
+	  var today,datee;
+			$(document).ready(function(){
+				var url = window.location.href;
+				var urlArr = url.split('&');
+				if(urlArr.length == 2 && urlArr[1]==""){
+				}
+				else{
+				var urlAr = urlArr[1];
+				today = urlAr
+				loadDataX(today);}
+			});
+	 var genScreenshot = function(){
+				
+		// ***svg to image files
+		
+		var svg = document.querySelectorAll( "svg" );
+				// chart1
+						
+						var svgData = new XMLSerializer().serializeToString( svg[2] );
+						var canvas6 = document.createElement( "canvas" );
+						var svgSize = svg[2].getBoundingClientRect();
+						canvas6.width = svgSize.width;
+						canvas6.height = svgSize.height;
+						
+						var ctx = canvas6.getContext( "2d" );
+
+						var img = document.createElement( "img" );
+						
+						img.setAttribute( "src", "data:image/svg+xml;base64," + btoa( unescape(encodeURIComponent(svgData)) ) );
+				
+				//chart2
+						var svgData2 = new XMLSerializer().serializeToString( svg[3] );
+						var canvas2 = document.createElement( "canvas" );
+						var svgSize2 = svg[3].getBoundingClientRect();
+						canvas2.width = svgSize2.width;
+						canvas2.height = svgSize2.height;
+
+						var ctx2 = canvas2.getContext( "2d" );
+
+						var img2 = document.createElement( "img" );
+						img2.setAttribute( "src", "data:image/svg+xml;base64," + btoa( unescape(encodeURIComponent(svgData2)) ) );
+
+				//chart3
+						var svgData3 = new XMLSerializer().serializeToString( svg[4] );
+						var canvas3 = document.createElement( "canvas" );
+						var svgSize3 = svg[4].getBoundingClientRect();
+						canvas3.width = svgSize3.width;
+						canvas3.height = svgSize3.height;
+						
+						var ctx3 = canvas3.getContext( "2d" );
+
+						var img3 = document.createElement( "img" );
+						//img3.src = "data:image/svg+xml," + encodeURIComponent(svgData3);
+						img3.setAttribute( "src", "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData3)) ));
+				
+				//Piechart1
+						var svgData4 = new XMLSerializer().serializeToString( svg[5] );
+						var canvas4 = document.createElement( "canvas" );
+						var svgSize4 = svg[5].getBoundingClientRect();
+						canvas4.width = svgSize4.width;
+						canvas4.height = svgSize4.height;
+
+						var ctx4 = canvas4.getContext( "2d" );
+
+						var img4 = document.createElement( "img" );
+						
+						img4.setAttribute( "src", "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData4))) );
+				//Piechart2
+						var svgData5 = new XMLSerializer().serializeToString( svg[6] );
+
+						var canvas5 = document.createElement( "canvas" );
+						var svgSize5 = svg[6].getBoundingClientRect();
+						canvas5.width = svgSize5.width;
+						canvas5.height = svgSize5.height;
+						
+						var ctx5 = canvas5.getContext( "2d" );
+
+						var img5 = document.createElement( "img" );
+						
+						img5.setAttribute( "src", "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData5))) );
+			
+			//replacing images in div 
+	
+			img.onload = function() {
+			
+				//chart1
+						ctx.drawImage( img, 0, 0 );
+						var imgsrc = canvas6.toDataURL("image/jpg");
+						document.getElementById("chart1").innerHTML="<img  align='center' src="+imgsrc+" />";
+		
+				//chart2
+						ctx2.drawImage( img2, 0, 0 );
+						var imgsrc2 = canvas2.toDataURL("image2/jpg");	
+						document.getElementById("chart2").innerHTML="<img align='center' src="+imgsrc2+" />";
+				
+				//chart3
+						ctx3.drawImage( img3, 0, 0 );
+						var imgsrc3 = canvas3.toDataURL("image3/");	
+						document.getElementById("chart3").innerHTML="<img align='center' src="+imgsrc3+" />";
+
+				//piechart1						
+						ctx4.drawImage( img4, 0, 0 );
+						var imgsrc4 = canvas4.toDataURL("image4/jpg");	
+						document.getElementById("piechart").innerHTML="<img align='center' src="+imgsrc4+" />";
+
+				//piechart2
+						ctx5.drawImage( img5, 0, 0 );
+						var imgsrc5 = canvas5.toDataURL("image5/jpg");	
+						document.getElementById("piechart2").innerHTML="<img align='center' src="+imgsrc5+" />";						
+				}
+
+		
+		//map********************************************************
+				
+		getMap();
+		
+		};
+	var getMap = function(){
+	
+									var mapPane = $(".leaflet-map-pane")[0];
+    
+    var SVG = $("svg.leaflet-zoom-animated")[0];
+		
+		var svgData11 = new XMLSerializer().serializeToString( SVG );
+						var canvas11 = document.createElement( "canvas" );
+						var svgSize11 = SVG.getBoundingClientRect();
+						canvas11.width = svgSize11.width;
+						canvas11.height = svgSize11.height;
+
+						var ctx11 = canvas11.getContext( "2d" );
+
+						var img11 = document.createElement( "img" );
+						
+						img11.setAttribute( "src", "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData11))) );
+			img11.onload = function() {
+		
+						ctx11.drawImage( img11, 0, 0 );
+						var imgsrc11 = canvas11.toDataURL("image/jpg");	
+					console.log(imgsrc11);
+					document.getElementById("overlay_img").innerHTML="<img align='center' style='position:relative' src="+imgsrc11+" />";
+		}
+		//mapend*****************************************************
+		// ****************
+			
+			//screenshot();
+		html2canvas(document.getElementById("map1"), {
+        		useCORS: true,
+					onrendered: function(canvas) {
+					$("#map1").empty();
+					//	console.log(canvas);
+						div = document.getElementById('map1');
+						div.appendChild(canvas);
+						
+						//document.body.appendChild(canvas);
+					//	screenshot();
+						//}
+						var doc = new jsPDF({
+							orientation: "p",
+							unit: "in",
+							format: [8.5,16]
+						});
+		
+					doc.addHTML($('#test'), function() {
+					doc.save('sample-file.pdf');
+				
+						});
+    }
+	});
+			setTimeout(function(){
+			today = document.getElementById('datepicker1').value;
+		//window.location.replace("http://139.162.61.147/nie_dev/dhis-web-reporting/generateHtmlReport.action?uid=PvF38Z4MOXg&"+today);
+	
+			},3000);
+	};
+	
+
+   function loadDataX(datee) {
+
+       var cloudmade1 = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+           maxZoom: 40,
+           attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+           key: 'BC9A493B41014CAABB9dsfsdfds8F0471D759707'
+       });
+
+       var map1 = L.map('map1')
+           .setView([13.23521,80.3332],10)
+           .addLayer(cloudmade1);
+       var style = function(){
+           return { color: "black",
+               opacity: 0.75,
+               fillColor: "red",
+               fillOpacity: 0.1,
+               dashArray: '5, 5',
+               weight: 3
+
+           }
+       }
+
+
+	if(datee == ""  || datee == 0){
+		today = document.getElementById('datepicker1').value;
+	}
+	else{
+		today = datee;
+	}
+  // var date = $('#datepicker1').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+   		
+
+          chartPlugin.url = "..";
+    chartPlugin.username = "admin";
+    chartPlugin.password = "Hispcdc@1234";
+    chartPlugin.loadingIndicator = true;
+    
+    // Referring to an existing chart through the id parameter, render to "report1" div
+    
+  
+
+  
+  //period for chart1//
+   var cart1 = [];
+   //var today = new Date();   
+   
+  var  year=today.substring(0,4);
+    var month=today.substring(5,7);
+    var piechartperod=year+''+month;
+	 var date=today.substring(8,today.length);
+	
+	 
+	var last30days='';
+	 var d = new Date(year,month-1,date);
+	 var  previousdy = new Date(d.getTime() - 1*24*60*60*1000);
+	 var mon=previousdy.getMonth()+1;
+	 if(mon<10)
+	 {mon='0'+mon;
+	 }
+	 var previousdy1=previousdy.getFullYear()+''+mon+''+previousdy.getDate();
+	  for (var x = 30; x >=1; x--) {
+	 // var date2=x-date;
+	 
+	var  startDate = new Date(d.getTime() - x*24*60*60*1000);
+
+  var date3=startDate.getDate();
+  if(date3<10){
+  date3='0'+date3;}
+  var month1=startDate.getMonth()+1;
+  if(month1<10){
+  month1='0'+month1;
+  }
+  var year1=startDate.getFullYear();
+  
+	 
+
+
+	  var period=year1+''+month1+''+date3;
+	
+            
+           last30days= period+';'+last30days;   
+				
+            };
+			
+			var len=last30days.length-1;
+	last30days=last30days.substring(0,len);
+	var blockwise=[];
+	
+	var tableapi = "../api/25/analytics.json?dimension=dx:blDy6poPvrH&dimension=pe:" + last30days+"&dimension=ou:LEVEL-5;TBAhacBUoDu&displayProperty=NAME";
+	   $.get(tableapi, function(odfjson) {
+
+            Certified_villages = odfjson.rows.length;
+			
+			var vlocks=odfjson.metaData.ou;
+			for(var k=0;k<vlocks.length;k++){
+			var data=0;
+			var blockwisedata=[];
+			for(var i=0;i<odfjson.rows.length;i++)
+			{
+			if(vlocks[k]==odfjson.rows[i][2])
+			{
+			data=data+parseInt(odfjson.rows[i][3]);
+			
+			}
+			
+			}
+			data=data/30;
+			data=data.toFixed(2);
+			blockwisedata["id"]=vlocks[k];
+			blockwisedata["data"]=data;
+			blockwise.push(blockwisedata);
+			
+			}
+        });
+		
+	
+			
+	
+	  for (var x = 1; x <=7; x++) {
+	  var date1=date-x;
+	  if(date1<10)
+	  {
+	 
+	 
+	  date1='0'+date1;}
+	  var period=year+''+month+''+date1;
+	
+            cart1.push(period);
+               
+				
+            };
+			if(date<10)
+			{
+			date=date-1;date='0'+date;
+			}
+			 
+        
+  
+  
+  
+  var previousbloc=[];
+  
+ 
+  var tableapi1 = "../api/25/analytics.json?dimension=dx:blDy6poPvrH&dimension=pe:" + previousdy1+"&dimension=ou:LEVEL-5;TBAhacBUoDu&displayProperty=NAME";
+	   $.get(tableapi1, function(odfjson1) {
+
+            previousday = odfjson1.rows.length;
+				var vlocks=odfjson1.metaData.ou;
+			for(var k=0;k<vlocks.length;k++){
+			var data1=0;
+			var prebloclwisedata=[];
+			for(var i=0;i<odfjson1.rows.length;i++)
+			{
+			if(vlocks[k]==odfjson1.rows[i][2])
+			{
+			data1=data1+parseInt(odfjson1.rows[i][3]);
+			
+			}
+			
+			}
+			
+			prebloclwisedata["id"]=vlocks[k];
+			prebloclwisedata["data"]=data1;
+			previousbloc.push(prebloclwisedata);
+			
+			}
+		
+
+//
+//
+
+
+//table//
+var tablerow="";
+for(var tab=0;tab<odfjson1.metaData.ou.length;tab++){
+ tablerow+="<tr><td style='text-align:left;'>" + tab + "</td><td style='text-align:left;'>" + odfjson1.metaData.names[previousbloc[tab].id] + "</td><td style='text-align:left;'>" +previousbloc[tab].data    + "</td><td style='text-align:left;'>" + blockwise[tab].data + "</td></tr>";
+}		
+	var tableheading="<tr><td style='text-align:left;'> S.No  </td><td style='text-align:left;'>Name of the Block </td><td style='text-align:left;'>No. of Fever Case </td><td style='text-align:left;'>Last 30 Days(Avg cases/Day)</td></tr>";
+	
+var table = "<H1 align='center' style='color:#000000'>Date of reporting </H1>"+ "<table>"+tableheading+ tablerow+"</table>";
+document.getElementById("summary").innerHTML = table;
+        });
+  //end//
+  
+chartPlugin.load([{
+  "columns": [
+    {
+      "dimension": "dx",
+      "items": [
+        {
+          "id": "blDy6poPvrH",
+          "name": "Inpatient fever case"
+        }
+      ]
+    }
+  ],
+  "rows": [
+    {
+      dimension: "pe",
+      items: [
+	  {
+          id: cart1[6]
+        
+        },
+		 {
+          id: cart1[5]
+        
+        },
+		 {
+          id: cart1[4]
+        
+        },
+		{
+          id: cart1[3]
+         
+        },
+        {
+          id: cart1[2]
+        },
+        {
+          id: cart1[1]
+        },
+        {
+          id: cart1[0]
+        }
+        
+       
+       
+        
+        
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "dimension": "ou",
+      "items": [
+        {
+          "id": "TBAhacBUoDu",
+          "name": "Tiruvallur"
+        }
+      ]
+    }
+  ],
+  "type": "line",
+  "url": "..",
+  "el": "chart1"
+}]);
+
+
+
+//2nd chart
+
+chartPlugin.load([{
+  "columns": [
+    {
+      "dimension": "dx",
+      "items": [
+        {
+          "id": "ipiUkDpWFyr",
+          "name": "Lab confirmed fever case"
+        }
+      ]
+    }
+  ],
+  "rows": [
+    {
+      dimension: "pe",
+      items: [
+	  {
+          id: cart1[6]
+        
+        },
+		 {
+          id: cart1[5]
+        
+        },
+		 {
+          id: cart1[4]
+        
+        },
+		{
+          id: cart1[3]
+         
+        },
+        {
+          id: cart1[2]
+        },
+        {
+          id: cart1[1]
+        },
+        {
+          id: cart1[0]
+        }
+        
+       
+       
+        
+        
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "dimension": "ou",
+      "items": [
+        {
+          "id": "TBAhacBUoDu",
+          "name": "Tiruvallur"
+        }
+      ]
+    }
+  ],
+  "type": "line",
+  "url": "..",
+  "el": "chart2"
+}]);
+
+
+
+//2nd charts end
+
+
+chartPlugin.load([{
+  "columns": [
+    {
+      "dimension": "dx",
+      "items": [
+        {
+          "id": "blDy6poPvrH",
+          "name": "Inpatient fever case"
+        }
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "dimension": "ou",
+      "items": [
+        {
+          "id": "LEVEL-5"
+        },
+        {
+          "id": "TBAhacBUoDu"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "dimension": "pe",
+      "items": [
+        {
+          "id": previousdy1
+          
+        }
+      ]
+    }
+  ],
+  "type": "bar",
+  "url": "..",
+  "el": "chart3"
+}]);
+
+//pie chart//
+
+
+//
+
+chartPlugin.load([{
+  "columns": [
+    {
+      "dimension": "pe",
+      "items": [
+        {
+          "id": previousdy1
+         
+        }
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "dimension": "dx",
+      "items": [
+        {
+          "id": "rQOnxbt4l91",
+          "name": "Inpatient fever case (age 1-5 yrs)"
+        },
+        {
+          "id": "YQhdiXEbGq9",
+          "name": "Inpatient fever case (age 6-12 yrs)"
+        },
+        {
+          "id": "MHcBlZkt9ev",
+          "name": "Inpatient fever case (age < 1 year)"
+        },
+        {
+          "id": "lRfNKh9QEhD",
+          "name": "Inpatient fever case (age > 12 yrs)"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "dimension": "ou",
+      "items": [
+        {
+          "id": "TBAhacBUoDu",
+          "name": "Tiruvallur"
+        }
+      ]
+    }
+  ],
+  "type": "pie",
+  "url": "..",
+  "el": "piechart"
+}]);
+
+
+//
+
+//pie chart end
+chartPlugin.load([{
+  "columns": [
+    {
+      "dimension": "pe",
+      "items": [
+        {
+          "id": previousdy1
+          
+        }
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "dimension": "dx",
+      "items": [
+        {
+          "id": "NlZZypce9nz",
+          "name": "Inpatient fever case (female)"
+        },
+        {
+          "id": "NmjHwmvWZ8t",
+          "name": "Inpatient fever case (male)"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "dimension": "ou",
+      "items": [
+        {
+          "id": "TBAhacBUoDu",
+          "name": "Tiruvallur"
+        }
+      ]
+    }
+  ],
+  "type": "pie",
+  "url": "..",
+  "el": "piechart2"
+}]);
+
+
+       $.getJSON("../api/organisationUnits?filter=level:eq:5&fields=id,name,coordinates&paging=false", function (response) {
+
+           addOrgUnits(getCoordinatesFromOus(response.organisationUnits),style);
+
+       });
+
+       function addOrgUnits(blockCoords,style){
+           var mp = {
+               "type": "Feature",
+               "geometry": {
+                   "type": "MultiPolygon",
+                   "coordinates": blockCoords
+               },
+               "properties": {
+                   "name": "MultiPolygon",
+                   key : "block"
+               }
+           };
+           L.geoJson(mp, {
+               style: function() {
+                   return { color: "black",
+                       opacity: 0.75,
+                       fillColor: "red",
+                       fillOpacity: 0.1,
+                       dashArray: '5, 5',
+                       weight: 3
+
+                   }
+               }
+           }).addTo(map1);
+
+       }
+
+       function getCoordinatesFromOus(ous){
+
+           var ouCoords = [];
+           for (var key in ous){
+               if (ous[key].coordinates){
+                   var coords = JSON.parse(ous[key].coordinates);
+                   ouCoords.push(coords[0]);
+               }
+           }
+           return ouCoords;
+       }
+
+
+      var markers = new L.FeatureGroup();
+       map1.removeLayer(markers);
+       markers.clearLayers();
+        $.getJSON("../api/analytics/events/query/xqoEn6Je5Kj.json?stage=Fy9tjDYgdBi&dimension=pe:"+previousdy1+"&dimension=ou:mbtRCrjzdgt&dimension=ylhxXcMMuZC:IN%3AAFI%3BADD%3BARI%3Bother_diagnosis&displayProperty=NAME", function (data) {
+
+             for(var i=0;i<data.rows.length;i++) {
+               var marker = L.circleMarker([data.rows[i][4], data.rows[i][3]], {radius:5,fillColor: "#FF0000",color:"#FF0000"}).addTo(map1).bindPopup("</br><strong>Organisation unit:</strong>"+data.rows[i][5]+"</br><strong>Event date:</strong>"+data.rows[i][2]+"</br><strong>Longitude:</strong>"+data.rows[i][3]+"</br><strong>Latitude:</strong>"+data.rows[i][4]+"</br><strong>Syndrome:</strong>"+data.rows[i][8]).openPopup();
+               markers.addLayer(marker);
+               map1.addLayer(markers);
+           }
+
+        });
+}
+
+  </script>
+    <style>
+        .map {
+            border: 0;
+            margin: 10px;
+        }
+        
+        .map.wide {
+            width: 1000px;
+            height: 200px;
+        }
+        
+        tr:nth-child(n+11) {
+            visibility: hidden;
+        }
+        
+        table,
+        tr,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+		
+		#overContainer{
+		}
+		
+		#overlay_img{
+			overflow:hidden;
+			opacity:0.9;
+		}
+		
+    </style>
+
+    <body >
+	
+
+<div>
+
+<a href="javascript:genScreenshot()"> Download</a>
+ <input type="date" id="datepicker1">
+ <input type="button" onClick="loadDataX(0)" value="Go" style="width:30px"/>
+</div><br>
+<br>
+<div id="test" style="width:100%; height:100%; background-color: #fff">
+
+
+        <table class="footer" style="width:100%; border:none;">
+            <tr><td style="width:10%; background-color:silver; border: 1px solid silver "></td>
+                <td style="width:20%; background-color:silver; border: 1px solid silver ">
+                    <img class="img-responsive" SRC="../api/documents/fRHtTpxXiXQ/data" align="left" width="150" height="50">
+                </td>
+                <td style="width:40%; background-color:silver;border: 1px solid silver">
+                    <h1 align="center" style="color:black;">
+                        <font size="5"><b> Electronic Daily Fever Surveillance System</b></font>
+                    </h1>
+                    <h1 align="center" style="color:black;">
+                        <font size="3"><b> GHSA project, NIE-ICMR, Chennai-77</b> </font>
+                        </h1>
+                            <h1 align="center" id="provinceid" style="color:#73264D; font-weight:bold">
+                                </h1>
+                </td>
+                <td style="width:20%;background-color:silver;border: 1px solid silver">
+
+                    <img class="img-responsive" SRC="../api/documents/WZreEJez1wP/data" align="right" width="150" height="50">
+                </td>
+				<td style="width:10%; background-color:silver; border: 1px solid silver "></td>
+            </tr>
+        </table>
+        </br>
+        </br>
+
+        </br>
+	<table style="width:100%;  border:none;">
+            <tr>
+                <td style="width:70%;border: 1px solid white ">
+                <div id="overContainer"> 
+					<div id="map1" style="margin:0;"></div>
+					<div id="overlay_img"></div>
+                </div>
+				</td>
+				 <td style="width:20%;border: 1px solid white ">
+                    <div id="summary" style="width:300px; height:500px"></div>
+                </td>
+
+
+				
+				</tr>
+				
+        </table>
+        <table style="width:100%;  border:none; ">
+            <tr>
+                <td style="width:50%;border: 1px solid white"><h1>AFI Inpatient Admission in Tirvallaur </h1>
+                    <div id="chart1" style="width: 500px;  height: 400px; margin: 0 auto; "></div>
+                </td style="width:50%;border: 1px solid white">
+				 <td style="width:50%;border: 1px solid white"><H1>Lab Confirmed AFI cases in Tiruvallur</H1>
+                    <div id="chart2" style="width: 500px;  height: 400px; margin: 0 auto; "></div>
+                </td>
+				
+            </tr>
+        </table>
+
+
+
+   
+		 <table style="width:100%;  border:none; ">
+            <tr>
+               
+				<td style="width:50%;border: 1px solid white"><h1>Block wise inpatient fever cases </h1>
+                    <div id="chart3" style="width: 1200px;  height: 400px; margin: 0 auto; "></div>
+                </td>
+            </tr>
+        </table>
+  
+<table style="width:100%;  border:none;">
+
+
+            <tr>
+               
+				<td  style="width:50%; border: 1px solid white" >
+				<h1> Distribution of fever cases by Gender</h1>
+                    <div id="piechart" style="width: 600px;  height: 400px; margin: 0 auto; "></div>
+                </td>
+				<td  style="width:50%;border: 1px solid white" >
+				<h1> Distribution of fever cases by Age </h1>
+                    <div id="piechart2" style="width: 580px;  height: 400px; margin: 0 auto; "></div>
+                </td>
+            </tr>
+        </table>
+		</br>
+</div>
+
+    </body>
+</head>
+
+</html>
