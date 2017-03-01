@@ -73,7 +73,20 @@ tr:nth-child(even) {
 </style>
     <script type="text/javascript">
 	  var today,datee;
+	  
 			$(document).ready(function(){
+			
+			var date = new Date();
+         if( (date.getMonth()+1) <10){
+             month="0"+(date.getMonth()+1)
+         }
+		 if(date.getDate() <10){
+			date1 = "0"+ date.getDate();
+		 }
+           var now = date.getFullYear()+'-' + month + '-'+ date1;
+
+             document.getElementById('datepicker1').value = now;
+			 
 				var url = window.location.href;
 				var urlArr = url.split('&');
 				if(urlArr.length == 2 && urlArr[1]==""){

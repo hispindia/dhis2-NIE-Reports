@@ -18,12 +18,16 @@
             cache: false,
             async : false,
         });
-        $(document).ready(function() {
+         $(document).ready(function() {
             var date = new Date();
             if( (date.getMonth()+1) <10){
                 month="0"+(date.getMonth()+1)
             }
-            var now = date.getFullYear()+'-' + month + '-'+date.getDate();
+						 if(date.getDate() <10){
+			date1 = "0"+ date.getDate();
+		 }
+
+            var now = date.getFullYear()+'-' + month + '-'+date1;
             document.getElementById('start').value = now;
 
         });
